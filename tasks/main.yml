@@ -1,0 +1,39 @@
+
+- name: "ensure group {{ needys_api_need_group_name }} does exist already"
+  become: yes
+  group:
+    name: "{{ needys_api_need_group_name }}"
+    state: present
+
+- name: "create system {{ needys_api_need_user_name }} user"
+  become: yes
+  user:
+    name: "{{ needys_api_need_user_name }}"
+    state: present
+    groups: "{{ needys_api_need_group_name }}"
+    shell: /sbin/nologin
+    append: yes
+    system: yes
+    comment: "system user without password to execute needys-api-need"
+
+# - name: download go archive version {{ needys_api_need_golang_version }}
+#   get_url:
+#     url: "https://golang.org/dl/go1.{{ needys_api_need_golang_version }}.linux-amd64.tar.gz"
+#     dest: "/tmp/go1.{{ needys_api_need_golang_version }}.linux-amd64.tar.gz"
+#
+# - name: unarchive golang tar
+#   unarchive:
+#     src: "/tmp/go1.{{ needys_api_need_golang_version }}.linux-amd64.tar.gz"
+#     dest: /usr/local/bin
+#     remote_src: yes
+
+- name: insert PATH and GOPATH values in .profile
+  lineinfile:
+    path: "{{ needys_api_need_user_home }}/.profile"
+    insertafter: EOF
+    line: "{{ text }}"
+  loop:
+    - "export PATH=$PATH:/usr/local/go/bin"
+    - "export GOPATH=~/.go"
+  loop_control:
+    loop_var: text

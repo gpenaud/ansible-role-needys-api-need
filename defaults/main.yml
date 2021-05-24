@@ -1,0 +1,5 @@
+---
+needys_api_need_user_name: needys-api-need
+needys_api_need_user_home: /home/needys-api-need
+needys_api_need_group_name: needys-api-need
+needys_api_need_golang_version: 16.4
