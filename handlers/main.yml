@@ -1,0 +1,13 @@
+---
+
+- name: "enable {{ needys_api_need_systemd_service_name }}"
+  systemd:
+    name: "{{ needys_api_need_systemd_service_name }}"
+    state: started
+    daemon_reload: yes
+    enabled: yes
+
+- name: "restart {{ needys_api_need_systemd_service_name }}"
+  systemd:
+    name: "{{ needys_api_need_systemd_service_name }}"
+    state: restarted

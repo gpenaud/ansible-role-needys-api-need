@@ -1,0 +1,34 @@
+
+- name: include checking of uris used
+  include_tasks: preflight_check_uris.yml
+  loop:
+  - "{{ needys_api_need_golang_url }}"
+  - "{{ needys_api_need_repository_url }}"
+  loop_control:
+    loop_var: uri
+
+- name: check that required vars are defined
+  assert:
+    that:
+    - variable is defined and variable != ""
+  loop:
+  - needys_api_need_version
+  - needys_api_need_user
+  - needys_api_need_group
+  - needys_api_need_user_home
+  - needys_api_need_golang_version
+  - needys_api_need_golang_url
+  - needys_api_need_binary
+  - needys_api_need_binary_path
+  - needys_api_need_systemd_service_name
+  - needys_api_need_systemd_service_path
+  - needys_api_need_repository_url
+  - needys_api_need_repository_path
+  - needys_api_need_binary_options
+  - needys_api_need_postflight_data.http_method
+  - needys_api_need_postflight_data.url
+  - needys_api_need_postflight_data.http_response_required
+  - needys_api_need_postflight_data.json_field_tested
+  - needys_api_need_postflight_data.json_value_required
+  loop_control:
+    loop_var: variable

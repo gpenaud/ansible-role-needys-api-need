@@ -1,0 +1,13 @@
+---
+- name: check that test query returns a 200 http code
+  uri:
+    url: "{{ needys_api_need_postflight_data.url }}"
+    method: "{{ needys_api_need_postflight_data.http_method }}"
+    return_content: yes
+    status_code: "{{ needys_api_need_postflight_data.http_response_required }}"
+  register: query_return
+
+- name: check the returned content of the query
+  assert:
+    that:
+    - "{{ needys_api_need_postflight_data.json_field_tested }} == \"{{ needys_api_need_postflight_data.json_value_required }}\""

@@ -1,5 +1,24 @@
 ---
-needys_api_need_user_name: needys-api-need
+needys_api_need_version: 0.0.1
+
+needys_api_need_user: needys-api-need
+needys_api_need_group: needys-api-need
 needys_api_need_user_home: /home/needys-api-need
-needys_api_need_group_name: needys-api-need
 needys_api_need_golang_version: 16.4
+needys_api_need_golang_url: "https://golang.org/dl/go1.{{ needys_api_need_golang_version }}.linux-amd64.tar.gz"
+
+needys_api_need_binary: needys-api-need
+needys_api_need_binary_path: /usr/local/bin
+needys_api_need_systemd_service_name: needys-api-need.service
+needys_api_need_systemd_service_path: /etc/systemd/system
+needys_api_need_repository_url: https://github.com/gpenaud/needys-api-need
+needys_api_need_repository_path: /tmp/needys-api-need
+
+needys_api_need_binary_options: []
+
+needys_api_need_postflight_data:
+  http_method: GET
+  url: http://apis.needys.lxc:8010
+  http_response_required: 200
+  json_field_tested: query_return.json[0].Priority
+  json_value_required: "very high"

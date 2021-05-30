@@ -1,0 +1,18 @@
+[Unit]
+Description=Handle need objects and queries for Needys application
+After=network-online.target
+
+[Service]
+Type=simple
+
+User={{ needys_api_need_user }}
+Group={{ needys_api_need_group }}
+UMask=007
+
+ExecStart={{ needys_api_need_binary_path }}/{{ needys_api_need_binary }} {{ needys_api_need_binary_options | join(" ") }}
+
+Restart=on-failure
+TimeoutStopSec=300
+
+[Install]
+WantedBy=multi-user.target
