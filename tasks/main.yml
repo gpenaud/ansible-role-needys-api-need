@@ -96,6 +96,8 @@
     - "restart {{ needys_api_need_systemd_service_name }}"
   when: force_all_tasks is defined and force_all_tasks == "yes"
 
+- meta: flush_handlers
+
 - name: initates the postflight checks
   include: check/postflight.yml
   tags: postflight
